@@ -25,12 +25,21 @@ class ContactsListingCell: UITableViewCell {
                     self.nameLabel.text = "\(firstName) \(lastName)"
                 }
             }
+            
+            if let profilePic = contact?.profile_pic {
+                
+                if profilePic == ContactsAPI.DEFAULT_IMG {
+                    self.profilePhotoImageView.sd_setImage(with: URL(string: ContactsAPI.DEFAULT_IMG_URL))
+                } else {
+                    self.profilePhotoImageView.sd_setImage(with: URL(string: profilePic))
+                }
+            }
         }
     }
     
     //MARK: - Views -
     
-    let avatarImageView : UIImageView = {
+    let profilePhotoImageView : UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
@@ -61,19 +70,19 @@ class ContactsListingCell: UITableViewCell {
     func setupViews() {
         self.selectionStyle = .none
         
-        self.contentView.addSubview(self.avatarImageView)
+        self.contentView.addSubview(self.profilePhotoImageView)
         self.contentView.addSubview(self.nameLabel)
         
-        self.avatarImageView.snp.makeConstraints { (make) in
+        self.profilePhotoImageView.snp.makeConstraints { (make) in
             make.top.equalTo(12)
             make.left.equalTo(16)
             make.width.height.equalTo(42)
         }
         
         self.nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.avatarImageView.snp.right).offset(16)
+            make.left.equalTo(self.profilePhotoImageView.snp.right).offset(16)
             make.right.equalTo(self.contentView)
-            make.centerY.equalTo(self.avatarImageView.snp.centerY)
+            make.centerY.equalTo(self.profilePhotoImageView.snp.centerY)
         }
     }
     

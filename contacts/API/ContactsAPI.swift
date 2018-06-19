@@ -13,14 +13,17 @@ typealias DataCompletionBlock = ( Data? ,_ error: Error?) -> Void
 
 class ContactsAPI
 {
-    static let BASE_URL = "https://gojek-contacts-app.herokuapp.com/"
+    static let BASE_URL = "https://gojek-contacts-app.herokuapp.com"
+    static let DEFAULT_IMG = "/images/missing.png"
+    static let DEFAULT_IMG_URL = "\(BASE_URL)\(DEFAULT_IMG)"
+    
     static let shared = ContactsAPI()
     
     //MARK: - API methods -
     
     //Retrieve contacts
     static func fetchContacts(completionHandler: @escaping DataCompletionBlock) {
-        let endPoint = "contacts.json"
+        let endPoint = "/contacts.json"
         let url = URL(string: "\(ContactsAPI.BASE_URL)\(endPoint)")!
         
         let parameters: Parameters = [:]

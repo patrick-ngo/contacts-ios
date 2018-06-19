@@ -25,13 +25,21 @@ class ContactsListingCell: UITableViewCell {
                     self.nameLabel.text = "\(firstName) \(lastName)"
                 }
             }
-            
+            // profile photo
             if let profilePic = contact?.profile_pic {
                 
                 if profilePic == ContactsAPI.DEFAULT_IMG {
                     self.profilePhotoImageView.sd_setImage(with: URL(string: ContactsAPI.DEFAULT_IMG_URL))
                 } else {
                     self.profilePhotoImageView.sd_setImage(with: URL(string: profilePic))
+                }
+            }
+            // favourite star
+            if let favourited = contact?.favorite {
+                if favourited {
+                    self.favouriteImageView.isHidden = false
+                } else {
+                    self.favouriteImageView.isHidden = true
                 }
             }
         }
@@ -59,6 +67,15 @@ class ContactsListingCell: UITableViewCell {
         return lbl
     }()
     
+    let favouriteImageView : UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.image = #imageLiteral(resourceName: "home_favourite")
+        iv.clipsToBounds = true
+        iv.layer.cornerRadius = 10 //size 20
+        return iv
+    }()
+    
     //MARK: - Init -
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -72,6 +89,7 @@ class ContactsListingCell: UITableViewCell {
         
         self.contentView.addSubview(self.profilePhotoImageView)
         self.contentView.addSubview(self.nameLabel)
+        self.contentView.addSubview(self.favouriteImageView)
         
         self.profilePhotoImageView.snp.makeConstraints { (make) in
             make.top.equalTo(12)
@@ -83,6 +101,12 @@ class ContactsListingCell: UITableViewCell {
             make.left.equalTo(self.profilePhotoImageView.snp.right).offset(16)
             make.right.equalTo(self.contentView)
             make.centerY.equalTo(self.profilePhotoImageView.snp.centerY)
+        }
+        
+        self.favouriteImageView.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.profilePhotoImageView.snp.centerY)
+            make.right.equalTo(-32)
+            make.width.height.equalTo(20)
         }
     }
     

@@ -43,7 +43,7 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
         UIApplication.shared.statusBarStyle = .lightContent
         
         guard let navBar = self.navigationController?.navigationBar else { return }
-        navBar.tintColor = UIColor.Text.darkGrey
+        navBar.tintColor = UIColor.Text.green
         navBar.barTintColor = UIColor.white
         navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Text.darkGrey]
         self.navigationItem.title = "Contacts"
@@ -51,6 +51,12 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
         if #available(iOS 11.0, *) {
             navBar.prefersLargeTitles = false
         }
+        
+        let groupsBtn = UIBarButtonItem(title: "Groups", style: .plain, target: self, action: #selector(onPressEdit))
+        let addBtn = UIBarButtonItem(title: "＋", style: .plain, target: self, action: #selector(onPressAdd))
+        
+        navigationItem.leftBarButtonItem = groupsBtn
+        navigationItem.rightBarButtonItem = addBtn
     }
     
     func setupViews() {
@@ -80,8 +86,14 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
-    @objc func reloadData(refreshControl:UIRefreshControl) {
-        self.loadData(reloadAll:true)
+    //MARK: - On Press handlers -
+    
+    @objc func onPressEdit() {
+        // TODO: go to edit screen
+    }
+    
+    @objc func onPressAdd() {
+        // TODO: go to add contact screen
     }
     
     //MARK: - TableView Datasource -

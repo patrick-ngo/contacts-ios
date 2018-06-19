@@ -16,6 +16,7 @@
 		B9639AE120D93659006A56A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9639ADF20D93659006A56A8 /* LaunchScreen.storyboard */; };
 		B9639AEC20D93659006A56A8 /* contactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9639AEB20D93659006A56A8 /* contactsTests.swift */; };
 		B9639AF720D93659006A56A8 /* contactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9639AF620D93659006A56A8 /* contactsUITests.swift */; };
+		B9639B0720D93C7A006A56A8 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9639B0620D93C7A006A56A8 /* UIColor+Hex.swift */; };
 		CA71BB874666F103B99C0C4F /* Pods_contactsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19C0C84A83FC9E9BE7D428A7 /* Pods_contactsTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		B9639AF220D93659006A56A8 /* contactsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = contactsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9639AF620D93659006A56A8 /* contactsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contactsUITests.swift; sourceTree = "<group>"; };
 		B9639AF820D93659006A56A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9639B0620D93C7A006A56A8 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		D7C31E1012F6AB730C239C7F /* Pods-contactsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-contactsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-contactsUITests/Pods-contactsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EC8601D57A019B9C54DEAD69 /* Pods-contactsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-contactsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-contactsTests/Pods-contactsTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 		B9639AD520D93657006A56A8 /* contacts */ = {
 			isa = PBXGroup;
 			children = (
+				B9639B0520D93C62006A56A8 /* Constants */,
 				B9639AD620D93657006A56A8 /* AppDelegate.swift */,
 				B9639AD820D93657006A56A8 /* ViewController.swift */,
 				B9639ADA20D93657006A56A8 /* Main.storyboard */,
@@ -163,6 +166,14 @@
 				B9639AF820D93659006A56A8 /* Info.plist */,
 			);
 			path = contactsUITests;
+			sourceTree = "<group>";
+		};
+		B9639B0520D93C62006A56A8 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				B9639B0620D93C7A006A56A8 /* UIColor+Hex.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -459,6 +470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9639B0720D93C7A006A56A8 /* UIColor+Hex.swift in Sources */,
 				B9639AD920D93657006A56A8 /* ViewController.swift in Sources */,
 				B9639AD720D93657006A56A8 /* AppDelegate.swift in Sources */,
 			);
@@ -636,7 +648,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = contacts/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ngo.patrick.contacts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -651,7 +666,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = contacts/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ngo.patrick.contacts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -667,7 +685,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = contactsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ngo.patrick.contactsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -684,7 +706,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = contactsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ngo.patrick.contactsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -700,7 +726,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = contactsUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ngo.patrick.contactsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -716,7 +746,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = contactsUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ngo.patrick.contactsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

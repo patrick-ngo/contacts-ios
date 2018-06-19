@@ -11,6 +11,8 @@ import UIKit
 import SnapKit
 
 class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var contactList: [ContactModel] = []
 
     
     //MARK: - Views -
@@ -22,7 +24,7 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
         tv.dataSource = self
         
         //cell registration
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
+        tv.register(ContactsListingCell.self, forCellReuseIdentifier: String(describing: ContactsListingCell.self))
         return tv
     }()
 
@@ -60,7 +62,22 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func loadData(reloadAll:Bool = false) {
-        //TODO: Load contacts here
+        ContactsAPI.fetchContacts { (result, error) in
+            if let result = result, error == nil {
+                do {
+                    let contactsResponse = try JSONDecoder().decode([ContactModel].self, from: result)
+                    
+                    //set list of contacts
+                    self.contactList = contactsResponse
+                    
+                    //reload table
+                    self.tableView.reloadData()
+                }
+                catch {
+                    print("Error serializing json:", error)
+                }
+            }
+        }
     }
     
     @objc func reloadData(refreshControl:UIRefreshControl) {
@@ -70,12 +87,15 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
     //MARK: - TableView Datasource -
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return contactList.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let contactCell = self.tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self))
+        let contactCell = self.tableView.dequeueReusableCell(withIdentifier: String(describing: ContactsListingCell.self)) as? ContactsListingCell
+        
+        //set contact
+        contactCell?.contact = contactList[indexPath.row]
         
         return contactCell!
     }
@@ -85,7 +105,7 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 64
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

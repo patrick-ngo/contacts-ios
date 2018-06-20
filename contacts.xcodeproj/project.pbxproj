@@ -13,6 +13,7 @@
 		B90835C220DA8D9C0023898E /* ContactDetailActionPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90835C120DA8D9C0023898E /* ContactDetailActionPanel.swift */; };
 		B90835C420DAA7B90023898E /* ContactDetailActionPanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90835C320DAA7B90023898E /* ContactDetailActionPanelDelegate.swift */; };
 		B90835C620DAA9190023898E /* ContactDetailVC+ActionPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90835C520DAA9190023898E /* ContactDetailVC+ActionPanel.swift */; };
+		B90835C820DAAD3E0023898E /* UILocalizedIndexedCollation+Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90835C720DAAD3E0023898E /* UILocalizedIndexedCollation+Contacts.swift */; };
 		B9639AD720D93657006A56A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9639AD620D93657006A56A8 /* AppDelegate.swift */; };
 		B9639ADE20D93659006A56A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9639ADD20D93659006A56A8 /* Assets.xcassets */; };
 		B9639AE120D93659006A56A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9639ADF20D93659006A56A8 /* LaunchScreen.storyboard */; };
@@ -58,6 +59,7 @@
 		B90835C120DA8D9C0023898E /* ContactDetailActionPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailActionPanel.swift; sourceTree = "<group>"; };
 		B90835C320DAA7B90023898E /* ContactDetailActionPanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailActionPanelDelegate.swift; sourceTree = "<group>"; };
 		B90835C520DAA9190023898E /* ContactDetailVC+ActionPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactDetailVC+ActionPanel.swift"; sourceTree = "<group>"; };
+		B90835C720DAAD3E0023898E /* UILocalizedIndexedCollation+Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILocalizedIndexedCollation+Contacts.swift"; sourceTree = "<group>"; };
 		B9639AD320D93657006A56A8 /* contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9639AD620D93657006A56A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9639ADD20D93659006A56A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				B9639B0620D93C7A006A56A8 /* UIColor+Hex.swift */,
 				B90835BB20DA7B5F0023898E /* UIView+Gradient.swift */,
 				B98B63EA20D96CCF007DF27A /* UIView+Border.swift */,
+				B90835C720DAAD3E0023898E /* UILocalizedIndexedCollation+Contacts.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 			files = (
 				B90835BC20DA7B5F0023898E /* UIView+Gradient.swift in Sources */,
 				B98B63E520D95920007DF27A /* ContactDetailVC.swift in Sources */,
+				B90835C820DAAD3E0023898E /* UILocalizedIndexedCollation+Contacts.swift in Sources */,
 				B90835C420DAA7B90023898E /* ContactDetailActionPanelDelegate.swift in Sources */,
 				B90835C220DA8D9C0023898E /* ContactDetailActionPanel.swift in Sources */,
 				B9639B0A20D93E8D006A56A8 /* ContactsListingVC.swift in Sources */,

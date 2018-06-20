@@ -85,13 +85,13 @@ class ContactDetailVC: UIViewController, ContactDetailActionPanelDelegate {
     
     let emailRow: ContactDetailLabelRow = {
         let tf = ContactDetailLabelRow(frame: CGRect.zero)
-        tf.nameLabel.text = "Mobile"
+        tf.nameLabel.text = "Email"
         return tf
     }()
     
     let mobileRow: ContactDetailLabelRow = {
         let tf = ContactDetailLabelRow(frame: CGRect.zero)
-        tf.nameLabel.text = "Email"
+        tf.nameLabel.text = "Mobile"
         return tf
     }()
     

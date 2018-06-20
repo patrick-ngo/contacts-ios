@@ -13,6 +13,7 @@ import SnapKit
 class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var contactList: [ContactModel] = []
+    var contactListWithSections = [[ContactModel]]()
 
     
     //MARK: - Views -
@@ -20,6 +21,7 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
     private lazy var tableView : UITableView = {
         let tv = UITableView(frame: CGRect.zero, style: .plain)
         tv.separatorStyle = .singleLine
+        tv.sectionIndexColor = UIColor.Text.lightGrey
         tv.separatorColor = UIColor.Border.line
         tv.delegate = self
         tv.dataSource = self
@@ -81,6 +83,7 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
                     
                     //set list of contacts
                     self.contactList = contactsResponse
+                    self.contactListWithSections = collation.partitionObjects(array: self.contactList)
                     
                     //reload table
                     self.tableView.reloadData()
@@ -103,9 +106,21 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     //MARK: - TableView Datasource -
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.contactListWithSections.count
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contactList.count
+         return self.contactListWithSections[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return collation.sectionTitles[section]
+    }
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return UILocalizedIndexedCollation.current().sectionTitles
     }
     
     
@@ -113,7 +128,7 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
         let contactCell = self.tableView.dequeueReusableCell(withIdentifier: String(describing: ContactsListingCell.self)) as? ContactsListingCell
         
         //set contact
-        contactCell?.contact = contactList[indexPath.row]
+        contactCell?.contact = self.contactListWithSections[indexPath.section][indexPath.row]
         
         return contactCell!
     }

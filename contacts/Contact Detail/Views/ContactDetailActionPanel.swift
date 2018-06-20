@@ -10,6 +10,8 @@ import UIKit
 
 class ContactDetailActionPanel: UIView {
     
+    weak var delegate:ContactDetailActionPanelDelegate? = nil
+    
     //MARK: - Views -
     
     lazy var messageButton : UIButton = {
@@ -185,18 +187,26 @@ class ContactDetailActionPanel: UIView {
     //MARK: - On Press Handlers -
     
     @objc func onPressMessage() {
-        print("message pressed")
+        if let delegate = self.delegate {
+            delegate.actionPanelMessagePressed()
+        }
     }
     
     @objc func onPressCall() {
-        print("call pressed")
+        if let delegate = self.delegate {
+            delegate.actionPanelCallPressed()
+        }
     }
     
     @objc func onPressEmail() {
-        print("email pressed")
+        if let delegate = self.delegate {
+            delegate.actionPanelEmailPressed()
+        }
     }
     
     @objc func onPressFavourite() {
-        print("favourite pressed")
+        if let delegate = self.delegate {
+            delegate.actionPanelFavouritePressed()
+        }
     }
 }

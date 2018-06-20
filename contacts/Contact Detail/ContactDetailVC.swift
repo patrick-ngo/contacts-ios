@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContactDetailVC: UIViewController {
+class ContactDetailVC: UIViewController, ContactDetailActionPanelDelegate {
     
     var contactId: Int? = nil
     var contact: ContactModel? = nil {
@@ -44,19 +44,20 @@ class ContactDetailVC: UIViewController {
     
     //MARK: - Views -
     
-    var actionPanel: ContactDetailActionPanel = {
+    lazy var actionPanel: ContactDetailActionPanel = {
         let ap = ContactDetailActionPanel()
+        ap.delegate = self
         return ap
     }()
     
-    var scrollView : UIScrollView = {
+    let scrollView : UIScrollView = {
         let sv = UIScrollView()
         sv.backgroundColor =  UIColor.Background.lightGrey
         sv.alwaysBounceVertical = true
         return sv
     }()
     
-    var backgroundImageView: UIView = {
+    let backgroundImageView: UIView = {
         let iv = UIView()
         iv.backgroundColor =  .white
         iv.contentMode = .scaleAspectFill
@@ -82,13 +83,13 @@ class ContactDetailVC: UIViewController {
         return lbl
     }()
     
-    var emailRow: ContactDetailLabelRow = {
+    let emailRow: ContactDetailLabelRow = {
         let tf = ContactDetailLabelRow(frame: CGRect.zero)
         tf.nameLabel.text = "Mobile"
         return tf
     }()
     
-    var mobileRow: ContactDetailLabelRow = {
+    let mobileRow: ContactDetailLabelRow = {
         let tf = ContactDetailLabelRow(frame: CGRect.zero)
         tf.nameLabel.text = "Email"
         return tf

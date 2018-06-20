@@ -10,6 +10,7 @@
 		52813EA579BA334A3A808AF3 /* Pods_contactsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A807005430219B2B6CF05DC6 /* Pods_contactsUITests.framework */; };
 		8E75A0A02F30E0F56EAAF106 /* Pods_contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FE9FD65B37A6E4A5A967801 /* Pods_contacts.framework */; };
 		B90835BC20DA7B5F0023898E /* UIView+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90835BB20DA7B5F0023898E /* UIView+Gradient.swift */; };
+		B90835C220DA8D9C0023898E /* ContactDetailActionPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90835C120DA8D9C0023898E /* ContactDetailActionPanel.swift */; };
 		B9639AD720D93657006A56A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9639AD620D93657006A56A8 /* AppDelegate.swift */; };
 		B9639AD920D93657006A56A8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9639AD820D93657006A56A8 /* ViewController.swift */; };
 		B9639ADE20D93659006A56A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9639ADD20D93659006A56A8 /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 		A41BE2D25B0649C1A381E6E4 /* Pods-contacts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-contacts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-contacts/Pods-contacts.debug.xcconfig"; sourceTree = "<group>"; };
 		A807005430219B2B6CF05DC6 /* Pods_contactsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_contactsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B90835BB20DA7B5F0023898E /* UIView+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Gradient.swift"; sourceTree = "<group>"; };
+		B90835C120DA8D9C0023898E /* ContactDetailActionPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailActionPanel.swift; sourceTree = "<group>"; };
 		B9639AD320D93657006A56A8 /* contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9639AD620D93657006A56A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9639AD820D93657006A56A8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				B98B63E720D95993007DF27A /* ContactDetailLabelRow.swift */,
+				B90835C120DA8D9C0023898E /* ContactDetailActionPanel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 			files = (
 				B90835BC20DA7B5F0023898E /* UIView+Gradient.swift in Sources */,
 				B98B63E520D95920007DF27A /* ContactDetailVC.swift in Sources */,
+				B90835C220DA8D9C0023898E /* ContactDetailActionPanel.swift in Sources */,
 				B9639B0A20D93E8D006A56A8 /* ContactsListingVC.swift in Sources */,
 				B9639B0720D93C7A006A56A8 /* UIColor+Hex.swift in Sources */,
 				B98B63E020D945FF007DF27A /* ContactModel.swift in Sources */,

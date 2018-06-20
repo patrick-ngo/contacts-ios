@@ -44,6 +44,11 @@ class ContactDetailVC: UIViewController {
     
     //MARK: - Views -
     
+    var actionPanel: ContactDetailActionPanel = {
+        let ap = ContactDetailActionPanel()
+        return ap
+    }()
+    
     var scrollView : UIScrollView = {
         let sv = UIScrollView()
         sv.backgroundColor =  UIColor.Background.lightGrey
@@ -107,16 +112,17 @@ class ContactDetailVC: UIViewController {
         self.scrollView.addSubview(self.emailRow)
         self.backgroundImageView.addSubview(self.profilePhotoImageView)
         self.backgroundImageView.addSubview(self.nameLabel)
+        self.backgroundImageView.addSubview(self.actionPanel)
         
         self.scrollView.snp.makeConstraints { (make) in
-            make.edges.equalTo(self.view)
+            make.left.right.bottom.equalTo(0)
             make.top.equalTo(0).offset(-64)
         }
         self.backgroundImageView.snp.makeConstraints { (make) in
-            make.left.equalTo(0)
-            make.right.equalTo(self.view.snp.right)
+            make.left.equalTo(self.view)
+            make.right.equalTo(self.view)
             make.top.equalTo(0)
-            make.height.equalTo(250)
+            make.height.equalTo(350)
         }
         self.profilePhotoImageView.snp.makeConstraints { (make) in
             make.top.equalTo(self.backgroundImageView.snp.top).offset(84)
@@ -126,6 +132,12 @@ class ContactDetailVC: UIViewController {
         self.nameLabel.snp.makeConstraints { (make) in
             make.top.equalTo(self.profilePhotoImageView.snp.bottom).offset(10)
             make.centerX.equalTo(self.profilePhotoImageView.snp.centerX)
+        }
+        self.actionPanel.snp.makeConstraints { (make) in
+            make.left.equalTo(44)
+            make.right.equalTo(-44)
+            make.height.equalTo(70)
+            make.bottom.equalTo(self.backgroundImageView.snp.bottom).offset(-15)
         }
         self.mobileRow.snp.makeConstraints { (make) in
             make.left.equalTo(0)

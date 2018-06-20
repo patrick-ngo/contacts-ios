@@ -80,6 +80,8 @@ class ContactDetailVC: UIViewController, ContactDetailActionPanelDelegate {
     let nameLabel:UILabel = {
         let lbl = UILabel()
         lbl.text = ""
+        lbl.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.bold)
+        lbl.textColor = UIColor.Text.darkGrey
         return lbl
     }()
     

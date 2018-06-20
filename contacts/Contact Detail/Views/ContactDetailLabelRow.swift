@@ -12,12 +12,15 @@ class ContactDetailLabelRow: UIView {
     
     let nameLabel:UILabel = {
         let lbl = UILabel()
+        lbl.textAlignment = .right
+        lbl.font = UIFont.systemFont(ofSize: 14)
         lbl.textColor = UIColor.Text.lightGrey
         return lbl
     }()
     
     let textField: UILabel = {
         let tf = UILabel()
+        tf.font = UIFont.systemFont(ofSize: 14)
         tf.textColor = UIColor.Text.darkGrey
         return tf
     }()
@@ -29,8 +32,8 @@ class ContactDetailLabelRow: UIView {
         self.addSubview(self.textField)
         
         self.nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(24)
-            make.width.equalTo(70)
+            make.left.equalTo(0)
+            make.width.equalTo(60)
             make.top.bottom.equalTo(0)
         }
         self.textField.snp.makeConstraints { (make) in

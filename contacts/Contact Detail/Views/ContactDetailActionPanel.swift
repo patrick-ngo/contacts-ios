@@ -22,7 +22,7 @@ class ContactDetailActionPanel: UIView {
         lbl.text = "Message"
         lbl.font = UIFont.systemFont(ofSize: 12.0)
         lbl.textAlignment = .center
-        lbl.textColor = UIColor.Text.lightGrey
+        lbl.textColor = UIColor.Text.darkGrey
         
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -58,7 +58,7 @@ class ContactDetailActionPanel: UIView {
         lbl.text = "Call"
         lbl.font = UIFont.systemFont(ofSize: 12.0)
         lbl.textAlignment = .center
-        lbl.textColor = UIColor.Text.lightGrey
+        lbl.textColor = UIColor.Text.darkGrey
         
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -94,7 +94,7 @@ class ContactDetailActionPanel: UIView {
         lbl.text = "Email"
         lbl.font = UIFont.systemFont(ofSize: 12.0)
         lbl.textAlignment = .center
-        lbl.textColor = UIColor.Text.lightGrey
+        lbl.textColor = UIColor.Text.darkGrey
         
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -130,7 +130,7 @@ class ContactDetailActionPanel: UIView {
         lbl.text = "Favourite"
         lbl.font = UIFont.systemFont(ofSize: 12.0)
         lbl.textAlignment = .center
-        lbl.textColor = UIColor.Text.lightGrey
+        lbl.textColor = UIColor.Text.darkGrey
         
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill

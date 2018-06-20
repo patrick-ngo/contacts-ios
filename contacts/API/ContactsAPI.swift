@@ -21,9 +21,21 @@ class ContactsAPI
     
     //MARK: - API methods -
     
-    //Retrieve contacts
+    // Get all contacts
     static func fetchContacts(completionHandler: @escaping DataCompletionBlock) {
         let endPoint = "/contacts.json"
+        let url = URL(string: "\(ContactsAPI.BASE_URL)\(endPoint)")!
+        
+        let parameters: Parameters = [:]
+        
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
+            completionHandler(response.data, response.error)
+        }
+    }
+    
+    // Get a single contact
+    static func fetchContact(id: Int, completionHandler: @escaping DataCompletionBlock) {
+        let endPoint = "/contacts/\(id).json"
         let url = URL(string: "\(ContactsAPI.BASE_URL)\(endPoint)")!
         
         let parameters: Parameters = [:]

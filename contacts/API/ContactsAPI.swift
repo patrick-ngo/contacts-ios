@@ -44,4 +44,32 @@ class ContactsAPI
             completionHandler(response.data, response.error)
         }
     }
+    
+    // Update a contact
+    static func updateContact(id: Int, contactParams: [String: String], completionHandler: @escaping DataCompletionBlock) {
+        let endPoint = "/contacts/\(id).json"
+        let url = URL(string: "\(ContactsAPI.BASE_URL)\(endPoint)")!
+        
+        //    Possible fields to update
+        //    "first_name": "",
+        //    "last_name": "",
+        //    "email": "",
+        //    "phone_number": "",
+        //    "profile_pic": ""
+        //    "favorite": false,
+
+        Alamofire.request(url, method: .put, parameters: contactParams, encoding: JSONEncoding.default).responseJSON { (response) in
+            completionHandler(response.data, response.error)
+        }
+    }
+    
+    // Create a contact
+    static func createContact(contactParams: [String: String], completionHandler: @escaping DataCompletionBlock) {
+        let endPoint = "/contacts.json"
+        let url = URL(string: "\(ContactsAPI.BASE_URL)\(endPoint)")!
+        
+        Alamofire.request(url, method: .post, parameters: contactParams, encoding: JSONEncoding.default).responseJSON { (response) in
+            completionHandler(response.data, response.error)
+        }
+    }
 }

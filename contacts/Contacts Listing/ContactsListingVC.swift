@@ -19,7 +19,8 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
     
     private lazy var tableView : UITableView = {
         let tv = UITableView(frame: CGRect.zero, style: .plain)
-        tv.separatorStyle = .none
+        tv.separatorStyle = .singleLine
+        tv.separatorColor = UIColor.Border.line
         tv.delegate = self
         tv.dataSource = self
         
@@ -41,22 +42,27 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func setupNavBar() {
         UIApplication.shared.statusBarStyle = .lightContent
-        
-        guard let navBar = self.navigationController?.navigationBar else { return }
-        navBar.tintColor = UIColor.Text.green
-        navBar.barTintColor = UIColor.white
-        navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Text.darkGrey]
+
+        // Customize navigation bar
         self.navigationItem.title = "Contacts"
+        self.navigationController?.navigationBar.tintColor = UIColor.Text.green
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.Text.darkGrey]
+        
+        // Remove bottom line/shadow
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.view.backgroundColor = .white
         
         if #available(iOS 11.0, *) {
-            navBar.prefersLargeTitles = false
+            self.navigationController?.navigationBar.prefersLargeTitles = false
         }
         
+        // Add Groups and + buttons
         let groupsBtn = UIBarButtonItem(title: "Groups", style: .plain, target: self, action: #selector(onPressEdit))
         let addBtn = UIBarButtonItem(title: "＋", style: .plain, target: self, action: #selector(onPressAdd))
-        
-        navigationItem.leftBarButtonItem = groupsBtn
-        navigationItem.rightBarButtonItem = addBtn
+        self.navigationItem.leftBarButtonItem = groupsBtn
+        self.navigationItem.rightBarButtonItem = addBtn
     }
     
     func setupViews() {
@@ -121,7 +127,12 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //do nothing
+        let contact = contactList[indexPath.row]
+        
+        // Go to contact detail screen
+        let contactDetailVC = ContactDetailVC()
+        contactDetailVC.contactId = contact.id
+        self.navigationController?.pushViewController(contactDetailVC, animated: true)
     }
     
     

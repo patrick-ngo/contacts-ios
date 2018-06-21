@@ -18,6 +18,12 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
     
     //MARK: - Views -
     
+    private var refreshControl:UIRefreshControl = {
+        let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+        return rc
+    }()
+    
     private lazy var tableView : UITableView = {
         let tv = UITableView(frame: CGRect.zero, style: .plain)
         tv.separatorStyle = .singleLine
@@ -25,6 +31,7 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
         tv.separatorColor = UIColor.Border.line
         tv.delegate = self
         tv.dataSource = self
+        tv.addSubview(self.refreshControl)
         
         //cell registration
         tv.register(ContactsListingCell.self, forCellReuseIdentifier: String(describing: ContactsListingCell.self))
@@ -99,7 +106,15 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
                     print("Error serializing json:", error)
                 }
             }
+            // stop refresh control
+            if (self.refreshControl.isRefreshing) {
+                self.refreshControl.endRefreshing()
+            }
         }
+    }
+    
+    @objc func reloadData(refreshControl: UIRefreshControl) {
+        self.loadData(reloadAll:true)
     }
     
     //MARK: - On Press handlers -

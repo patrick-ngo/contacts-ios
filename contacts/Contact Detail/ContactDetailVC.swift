@@ -102,14 +102,21 @@ class ContactDetailVC: UIViewController, ContactDetailActionPanelDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupNavBar()
-        self.addEditButton()
+        self.setupNavBarButtons()
         self.setupViews()
         
         self.loadData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.setupNavBar()
+    }
+    
     func setupViews() {
-        self.view.addSubview(self.scrollView)
+        let containerView = UIView()
+        self.view.addSubview(containerView)
+        containerView.addSubview(self.scrollView)
+
         self.scrollView.addSubview(self.backgroundImageView)
         self.scrollView.addSubview(self.mobileRow)
         self.scrollView.addSubview(self.emailRow)
@@ -117,19 +124,21 @@ class ContactDetailVC: UIViewController, ContactDetailActionPanelDelegate {
         self.backgroundImageView.addSubview(self.nameLabel)
         self.backgroundImageView.addSubview(self.actionPanel)
         
+        containerView.snp.makeConstraints { (make) in
+            make.left.right.bottom.top.equalTo(0)
+        }
         self.scrollView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(0)
-            make.top.equalTo(0).offset(-64)
+            make.left.right.bottom.top.equalTo(0)
         }
         self.backgroundImageView.snp.makeConstraints { (make) in
             make.left.equalTo(self.view)
             make.right.equalTo(self.view)
-            make.top.equalTo(0)
-            make.height.equalTo(350)
+            make.top.equalTo(containerView.snp.top)
+            make.bottom.equalTo(self.scrollView.snp.top).offset(300)
         }
         self.profilePhotoImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.backgroundImageView.snp.top).offset(84)
-            make.centerX.equalTo(self.backgroundImageView.snp.centerX)
+            make.top.equalTo(self.scrollView.snp.top).offset(20)
+            make.centerX.equalTo(self.scrollView.snp.centerX)
             make.width.height.equalTo(120)
         }
         self.nameLabel.snp.makeConstraints { (make) in
@@ -164,12 +173,7 @@ class ContactDetailVC: UIViewController, ContactDetailActionPanelDelegate {
         self.navigationController?.navigationBar.backgroundColor = .clear
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        self.navigationController?.navigationBar.backgroundColor = .white
-    }
-    
-    func addEditButton() {
+    func setupNavBarButtons() {
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = false
         }
@@ -199,6 +203,10 @@ class ContactDetailVC: UIViewController, ContactDetailActionPanelDelegate {
     //MARK: - On Press handlers -
     
     @objc func onPressEdit() {
-        
+        // Go to contact edit screen
+        let contactEditVC = ContactEditVC()
+        contactEditVC.contact = self.contact
+        let contactEditNavController = UINavigationController(rootViewController: contactEditVC)
+        self.present(contactEditNavController, animated: true)
     }
 }

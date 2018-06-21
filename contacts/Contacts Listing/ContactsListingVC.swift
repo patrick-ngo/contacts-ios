@@ -38,8 +38,13 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
         super.viewDidLoad()
         
         self.setupNavBar()
+        self.setupNavBarButtons()
         self.setupViews()
         self.loadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.setupNavBar()
     }
     
     func setupNavBar() {
@@ -59,7 +64,9 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = false
         }
-        
+    }
+    
+    func setupNavBarButtons() {
         // Add Groups and + buttons
         let groupsBtn = UIBarButtonItem(title: "Groups", style: .plain, target: self, action: #selector(onPressEdit))
         let addBtn = UIBarButtonItem(title: "＋", style: .plain, target: self, action: #selector(onPressAdd))
@@ -142,7 +149,7 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let contact = contactList[indexPath.row]
+        let contact = contactListWithSections[indexPath.section][indexPath.row]
         
         // Go to contact detail screen
         let contactDetailVC = ContactDetailVC()

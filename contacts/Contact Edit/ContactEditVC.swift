@@ -22,9 +22,7 @@ class ContactEditVC: UIViewController {
             // profile photo
             if let profilePic = contact?.profile_pic {
                 
-                if profilePic == ContactsAPI.DEFAULT_IMG {
-                    self.profilePhotoImageView.image = #imageLiteral(resourceName: "placeholder_photo")
-                } else {
+                if profilePic != ContactsAPI.DEFAULT_IMG {
                     self.profilePhotoImageView.sd_setImage(with: URL(string: profilePic))
                 }
             }
@@ -67,6 +65,7 @@ class ContactEditVC: UIViewController {
     
     let profilePhotoImageView: UIImageView = {
         let iv = UIImageView()
+        iv.image = #imageLiteral(resourceName: "placeholder_photo")
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.layer.cornerRadius = 60 //size 120
@@ -258,7 +257,12 @@ class ContactEditVC: UIViewController {
                         self.dismiss(animated: true)
                     }
                     catch {
-                        print("Error serializing json:", error)
+                        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                        self.present(alert, animated: true)
+                    }
+                    if let error = error {
+                        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                        self.present(alert, animated: true)
                     }
                 }
             }
@@ -268,12 +272,18 @@ class ContactEditVC: UIViewController {
             ContactsAPI.createContact(contactParams: contactParams) { (result, error) in
                 if let result = result, error == nil {
                     do {
+                        let _ = try JSONDecoder().decode(ContactModel.self, from: result)
                         // TODO: refresh the list of contacts
                         self.dismiss(animated: true)
                     }
                     catch {
-                        print("Error serializing json:", error)
+                        let alert = UIAlertController(title: "Error", message: "Error creating contact.", preferredStyle: .alert)
+                        self.present(alert, animated: true)
                     }
+                }
+                if let error = error {
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    self.present(alert, animated: true)
                 }
             }
         }

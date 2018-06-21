@@ -194,7 +194,8 @@ class ContactDetailVC: UIViewController, ContactDetailActionPanelDelegate, Conta
                     self.contact = contactResponse
                 }
                 catch {
-                    print("Error serializing json:", error)
+                    let alert = UIAlertController(title: "Error", message: "Error fetching contact.", preferredStyle: .alert)
+                    self.present(alert, animated: true)
                 }
             }
         }

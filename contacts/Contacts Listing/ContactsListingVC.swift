@@ -75,7 +75,7 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func setupNavBarButtons() {
         // Add Groups and + buttons
-        let groupsBtn = UIBarButtonItem(title: "Groups", style: .plain, target: self, action: #selector(onPressEdit))
+        let groupsBtn = UIBarButtonItem(title: "Groups", style: .plain, target: self, action: #selector(onPressGroups))
         let addBtn = UIBarButtonItem(title: "＋", style: .plain, target: self, action: #selector(onPressAdd))
         self.navigationItem.leftBarButtonItem = groupsBtn
         self.navigationItem.rightBarButtonItem = addBtn
@@ -119,12 +119,15 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
     
     //MARK: - On Press handlers -
     
-    @objc func onPressEdit() {
-        // TODO: go to edit screen
+    @objc func onPressGroups() {
+        // TODO: go to groups screen
     }
     
     @objc func onPressAdd() {
-        // TODO: go to add contact screen
+        // Go to contact add screen
+        let contactEditVC = ContactEditVC()
+        let contactEditNavController = UINavigationController(rootViewController: contactEditVC)
+        self.present(contactEditNavController, animated: true)
     }
     
     //MARK: - TableView Datasource -

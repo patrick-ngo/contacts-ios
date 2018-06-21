@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContactDetailVC: UIViewController, ContactDetailActionPanelDelegate {
+class ContactDetailVC: UIViewController, ContactDetailActionPanelDelegate, ContactEditDelegate {
     
     var contactId: Int? = nil
     var contact: ContactModel? = nil {
@@ -206,7 +206,16 @@ class ContactDetailVC: UIViewController, ContactDetailActionPanelDelegate {
         // Go to contact edit screen
         let contactEditVC = ContactEditVC()
         contactEditVC.contact = self.contact
+        contactEditVC.delegate = self
+
         let contactEditNavController = UINavigationController(rootViewController: contactEditVC)
         self.present(contactEditNavController, animated: true)
+    }
+    
+    //MARK: - ContactEditDelegate -
+    
+    func contactUpdated(contact: ContactModel) {
+        self.contactId = contact.id
+        self.contact = contact
     }
 }

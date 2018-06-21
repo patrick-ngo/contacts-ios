@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol ContactEditDelegate:class {
+    func contactUpdated(contact: ContactModel)
+}
+
 class ContactEditVC: UIViewController {
+    
+    weak var delegate:ContactEditDelegate? = nil
     
     var contactId: Int? = nil
     var contact: ContactModel? = nil {
@@ -224,6 +230,53 @@ class ContactEditVC: UIViewController {
     
     @objc func onPressDone() {
         //TODO: save to api
+        
+        let firstName = self.firstNameRow.textField.text!
+        let lastName = self.lastNameRow.textField.text!
+        let mobile = self.mobileRow.textField.text!
+        let email = self.emailRow.textField.text!
+        
+        let contactParams = [
+            "first_name": firstName,
+            "last_name": lastName,
+            "phone_number": mobile,
+            "email": email
+        ]
+        
+        // Updating a contact
+        if let contact = self.contact {
+            ContactsAPI.updateContact(id: contact.id!, contactParams: contactParams) { (result, error) in
+                if let result = result, error == nil {
+                    do {
+                        let contactResponse = try JSONDecoder().decode(ContactModel.self, from: result)
+                        
+                        // Notify delegate
+                        if let delegate = self.delegate {
+                            delegate.contactUpdated(contact: contactResponse)
+                        }
+                        // TODO: refresh the list of contacts
+                        self.dismiss(animated: true)
+                    }
+                    catch {
+                        print("Error serializing json:", error)
+                    }
+                }
+            }
+        }
+        // Creating a contact
+        else {
+            ContactsAPI.createContact(contactParams: contactParams) { (result, error) in
+                if let result = result, error == nil {
+                    do {
+                        // TODO: refresh the list of contacts
+                        self.dismiss(animated: true)
+                    }
+                    catch {
+                        print("Error serializing json:", error)
+                    }
+                }
+            }
+        }
     }
     
     @objc func onPressCancel() {

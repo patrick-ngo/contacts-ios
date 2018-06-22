@@ -28,9 +28,101 @@ class contactsUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testGotoContactDetail() {
+        let app = XCUIApplication()
+
+        //exist predicate condition
+        let exists = NSPredicate(format: "exists == true")
+
+
+        //Find the contact listings table view
+        let contactsListingTableView = app.tables["contacts_collectionview"]
+        expectation(for: exists, evaluatedWith: contactsListingTableView, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssert(contactsListingTableView.exists)
+
+
+        //Find the first available contact cell
+        let contactCell = contactsListingTableView.cells.matching(identifier: "contact_listing_cell").element(boundBy: 0)
+        expectation(for: exists, evaluatedWith: contactCell, handler: nil)
+
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssert(contactCell.exists)
+        contactCell.tap()
+
+
+        //Once in the contact detail page, make sure back button exists
+        let contactDetailBackButton = app.navigationBars.buttons.element(boundBy: 0)
+        expectation(for: exists, evaluatedWith: contactDetailBackButton, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssert(contactDetailBackButton.exists)
+
+        //Go back to contact listings
+        contactDetailBackButton.tap()
     }
     
+    func testGotoEditContact() {
+        let app = XCUIApplication()
+        
+        //exist predicate condition
+        let exists = NSPredicate(format: "exists == true")
+        
+        
+        //Find the contact listings table view
+        let contactsListingTableView = app.tables["contacts_collectionview"]
+        expectation(for: exists, evaluatedWith: contactsListingTableView, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssert(contactsListingTableView.exists)
+        
+        
+        //Find the first available contact cell
+        let contactCell = contactsListingTableView.cells.matching(identifier: "contact_listing_cell").element(boundBy: 0)
+        expectation(for: exists, evaluatedWith: contactCell, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssert(contactCell.exists)
+        
+        contactCell.tap()
+        
+        
+        //Once in the contact detail page, make sure back button exists
+        let contactDetailEditButton = app.navigationBars.buttons.element(boundBy: 1)
+        expectation(for: exists, evaluatedWith: contactDetailEditButton, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssert(contactDetailEditButton.exists)
+        
+        contactDetailEditButton.tap()
+        
+        //Once in the contact detail page, make sure back button exists
+        let editContactBackButton = app.navigationBars.buttons.element(boundBy: 0)
+        expectation(for: exists, evaluatedWith: editContactBackButton, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssert(editContactBackButton.exists)
+        
+        editContactBackButton.tap()
+    }
+    
+    func testGoToCreateContact() {
+        let app = XCUIApplication()
+        
+        //exist predicate condition
+        let exists = NSPredicate(format: "exists == true")
+        
+        //Once in the contact detail page, make sure back button exists
+        let contactListingAddButton = app.navigationBars.buttons.element(boundBy: 1)
+        expectation(for: exists, evaluatedWith: contactListingAddButton, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssert(contactListingAddButton.exists)
+        
+        contactListingAddButton.tap()
+        
+        //Once in the contact detail page, make sure back button exists
+        let createContactBackButton = app.navigationBars.buttons.element(boundBy: 0)
+        expectation(for: exists, evaluatedWith: createContactBackButton, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssert(createContactBackButton.exists)
+        
+        //Go back to contact listings
+        createContactBackButton.tap()
+    }
 }

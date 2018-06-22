@@ -24,6 +24,7 @@
 		B9639AF720D93659006A56A8 /* contactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9639AF620D93659006A56A8 /* contactsUITests.swift */; };
 		B9639B0720D93C7A006A56A8 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9639B0620D93C7A006A56A8 /* UIColor+Hex.swift */; };
 		B9639B0A20D93E8D006A56A8 /* ContactsListingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9639B0920D93E8D006A56A8 /* ContactsListingVC.swift */; };
+		B978742220DD4F640046BBCC /* ContactsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98B63E120D94768007DF27A /* ContactsAPI.swift */; };
 		B98B63DD20D944C0007DF27A /* ContactsListingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98B63DC20D944C0007DF27A /* ContactsListingCell.swift */; };
 		B98B63E020D945FF007DF27A /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98B63DF20D945FF007DF27A /* ContactModel.swift */; };
 		B98B63E220D94768007DF27A /* ContactsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98B63E120D94768007DF27A /* ContactsAPI.swift */; };
@@ -597,6 +598,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9639AEC20D93659006A56A8 /* contactsTests.swift in Sources */,
+				B978742220DD4F640046BBCC /* ContactsAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

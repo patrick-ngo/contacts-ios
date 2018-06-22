@@ -21,16 +21,49 @@ class contactsTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testFetchContact() {
+        
+        let testFetchContactExpectation = expectation(description: "Test fetchContact")
+        
+        ContactsAPI.fetchContact(id: 83) { (result, error) in
+            if let result = result, error == nil {
+                do {
+                    let contactResponse = try JSONDecoder().decode(ContactModel.self, from: result)
+                    XCTAssertNotNil(contactResponse)
+                    XCTAssertEqual(contactResponse.first_name, "Prashant")
+                    XCTAssertEqual(contactResponse.last_name, "Rastogi")
+                    
+                    testFetchContactExpectation.fulfill()
+                }
+                catch {
+                    XCTAssertNil(error, "testFetchContact error detected")
+                }
+            }
         }
+        
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    
+    func testFetchContacts() {
+        
+        let testFetchContactsExpectation = expectation(description: "Test fetchContacts")
+        
+        ContactsAPI.fetchContacts { (result, error) in
+            if let result = result, error == nil {
+                do {
+                    let contactsResponse = try JSONDecoder().decode([ContactModel].self, from: result)
+                    XCTAssertNotNil(contactsResponse)
+
+                    testFetchContactsExpectation.fulfill()
+                }
+                catch {
+                    XCTAssertNil(error, "testFetchContacts error detected")
+                }
+            }
+        }
+        
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
 }

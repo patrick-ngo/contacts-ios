@@ -26,6 +26,7 @@ class ContactListingsVC: UIViewController, UITableViewDelegate, UITableViewDataS
     
     private lazy var tableView : UITableView = {
         let tv = UITableView(frame: CGRect.zero, style: .plain)
+        tv.accessibilityLabel = "contacts_collectionview"
         tv.separatorStyle = .singleLine
         tv.sectionIndexColor = UIColor.Text.lightGrey
         tv.separatorColor = UIColor.Border.line

@@ -85,6 +85,7 @@ class ContactsListingCell: UITableViewCell {
     }
     
     func setupViews() {
+        self.accessibilityLabel = "contact_listing_cell"
         self.selectionStyle = .none
         
         self.contentView.addSubview(self.profilePhotoImageView)

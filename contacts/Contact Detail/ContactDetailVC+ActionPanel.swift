@@ -31,6 +31,27 @@ extension ContactDetailVC {
     }
     
     func actionPanelFavouritePressed() {
-        //TODO: toggle favourite
+        guard let contact = self.contact else { return }
+        guard let favourited = contact.favorite else { return }
+        let contactParams = [ "favorite": String(!favourited) ]
+        
+        // Update contact's favorite
+        ContactsAPI.updateContact(id: contact.id!, contactParams: contactParams) { (result, error) in
+            if let result = result, error == nil {
+                do {
+                    let contactResponse = try JSONDecoder().decode(ContactModel.self, from: result)
+                    
+                    self.contact = contactResponse
+                }
+                catch {
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    self.present(alert, animated: true)
+                }
+                if let error = error {
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    self.present(alert, animated: true)
+                }
+            }
+        }
     }
 }

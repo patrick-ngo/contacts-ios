@@ -39,6 +39,10 @@ class ContactDetailVC: UIViewController, ContactDetailActionPanelDelegate, Conta
             if let email = contact?.email {
                 self.emailRow.textField.text = email
             }
+            // favourite
+            if let favourite = contact?.favorite {
+                self.actionPanel.favourited = favourite
+            }
         }
     }
     

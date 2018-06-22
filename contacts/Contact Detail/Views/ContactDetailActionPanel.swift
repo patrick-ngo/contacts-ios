@@ -12,6 +12,12 @@ class ContactDetailActionPanel: UIView {
     
     weak var delegate:ContactDetailActionPanelDelegate? = nil
     
+    var favourited: Bool = false {
+        didSet {
+            self.favouriteImageView.image = favourited ? #imageLiteral(resourceName: "favourite_button_selected") : #imageLiteral(resourceName: "favourite_button")
+        }
+    }
+    
     //MARK: - Views -
     
     lazy var messageButton : UIButton = {
@@ -132,17 +138,10 @@ class ContactDetailActionPanel: UIView {
         lbl.textAlignment = .center
         lbl.textColor = UIColor.Text.darkGrey
         
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
-        iv.image = #imageLiteral(resourceName: "favourite_button")
-        iv.clipsToBounds = true
-        iv.layer.cornerRadius = 22 //size 44
-        iv.backgroundColor = UIColor.white
-        
         btn.addSubview(lbl)
-        btn.addSubview(iv)
+        btn.addSubview(self.favouriteImageView)
         
-        iv.snp.makeConstraints { (make) in
+        self.favouriteImageView.snp.makeConstraints { (make) in
             make.width.height.equalTo(44)
             make.top.equalTo(0)
             make.centerX.equalTo(btn)
@@ -150,12 +149,22 @@ class ContactDetailActionPanel: UIView {
         
         lbl.snp.makeConstraints { (make) in
             make.width.equalTo(70)
-            make.top.equalTo(iv.snp.bottom).offset(5)
+            make.top.equalTo(self.favouriteImageView.snp.bottom).offset(5)
             make.height.equalTo(20)
             make.centerX.equalTo(btn)
         }
         
         return btn
+    }()
+    
+    let favouriteImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.image = #imageLiteral(resourceName: "favourite_button")
+        iv.clipsToBounds = true
+        iv.layer.cornerRadius = 22 //size 44
+        iv.backgroundColor = UIColor.white
+        return iv
     }()
     
     

@@ -12,7 +12,7 @@ protocol ContactEditDelegate:class {
     func contactUpdated(contact: ContactModel)
 }
 
-class ContactEditVC: UIViewController {
+class ContactEditVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     weak var delegate:ContactEditDelegate? = nil
     
@@ -47,6 +47,11 @@ class ContactEditVC: UIViewController {
     
     //MARK: - Views -
     
+    let containerView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     let scrollView : UIScrollView = {
         let sv = UIScrollView()
         sv.backgroundColor =  UIColor.Background.lightGrey
@@ -78,6 +83,7 @@ class ContactEditVC: UIViewController {
     let cameraButton: UIButton = {
         let btn = UIButton(type: UIButtonType.custom)
         btn.setImage(#imageLiteral(resourceName: "camera_button"), for: UIControlState.normal)
+        btn.addTarget(self, action: #selector(onPressCamera), for: .touchUpInside)
         return btn
     }()
     
@@ -109,17 +115,19 @@ class ContactEditVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //keyboard notifications
+        self.registerKeyBoardNotifications()
+        
         self.setupNavBar()
         self.addNavbarButtons()
         self.setupViews()
-        
-//        self.loadData()
     }
     
     func setupViews() {
-        let containerView = UIView()
-        self.view.addSubview(containerView)
-        containerView.addSubview(self.scrollView)
+        self.view.addSubview(self.containerView)
+        self.containerView.addSubview(self.scrollView)
+        self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 440)
         
         self.scrollView.addSubview(self.backgroundImageView)
         self.backgroundImageView.addSubview(self.profilePhotoImageView)
@@ -130,11 +138,12 @@ class ContactEditVC: UIViewController {
         self.scrollView.addSubview(self.mobileRow)
         self.scrollView.addSubview(self.emailRow)
         
-        containerView.snp.makeConstraints { (make) in
+        self.containerView.snp.makeConstraints { (make) in
             make.left.right.bottom.top.equalTo(0)
         }
         self.scrollView.snp.makeConstraints { (make) in
-            make.left.right.bottom.top.equalTo(0)
+            make.edges.equalTo(self.containerView)
+            make.bottom.equalTo(self.containerView.snp.bottom).offset(0)
         }
         self.backgroundImageView.snp.makeConstraints { (make) in
             make.left.equalTo(self.view)
@@ -207,24 +216,6 @@ class ContactEditVC: UIViewController {
         navigationItem.rightBarButtonItem = doneBtn
     }
     
-    func loadData() {
-        guard let contactId = self.contactId else { return }
-        
-        ContactsAPI.fetchContact(id: contactId) { (result, error) in
-            if let result = result, error == nil {
-                do {
-                    let contactResponse = try JSONDecoder().decode(ContactModel.self, from: result)
-                    
-                    // Set contact
-                    self.contact = contactResponse
-                }
-                catch {
-                    print("Error serializing json:", error)
-                }
-            }
-        }
-    }
-    
     //MARK: - On Press handlers -
     
     @objc func onPressDone() {
@@ -289,7 +280,55 @@ class ContactEditVC: UIViewController {
         }
     }
     
+    @objc func onPressCamera() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        self.present(picker, animated: true, completion: nil)
+    }
+    
     @objc func onPressCancel() {
         self.dismiss(animated: true)
+    }
+    
+    //MARK: - UIImagePickerControllerDelegate / UINavigationControllerDelegate -
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        self.profilePhotoImageView.image = chosenImage
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+
+    //MARK: - Keyboard notifications -
+    
+    override func keyboardWillShow(_ notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            self.scrollView.snp.updateConstraints({ (make) in
+                make.bottom.equalTo(0).offset(-keyboardSize.size.height)
+            })
+        }
+        if let duration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber) {
+            UIView.animate(withDuration: TimeInterval(truncating: duration), animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
+    override func keyboardWillHide(_ notification: Notification) {
+        self.scrollView.snp.updateConstraints({ (make) in
+            make.bottom.equalTo(0)
+        })
+        if let duration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber) {
+            UIView.animate(withDuration: TimeInterval(truncating: duration), animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
     }
 }
